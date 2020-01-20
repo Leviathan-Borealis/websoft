@@ -1,0 +1,17 @@
+Answer, or reflect upon, the following questions. Write freely, between 15 to 30  sentences.
+Did you before know about the techniques Git, GitHub, Markdown and/or GitHub Pages?
+
+GIT: Yes, experienced. Hosting a GitLab server since 2,5years
+GitHub: Yes, some experience. Haven't used it that much due to using my own server
+Markdown: Yes but only limited.
+GitHub pages: Some but only limited
+
+Have you ever created websites before?
+Yes I have. Both in pure HTML/Flash and in HTML/CSS/JS(React/TypeScript)
+
+Briefly explain your experience and knowledge of web application development.
+I would describe my experience as limited regarding web development.
+The Dynamic typing and working with UI feels challenging and confusing.
+
+What is your TIL for this course section?
+Many new names on frameworks.
