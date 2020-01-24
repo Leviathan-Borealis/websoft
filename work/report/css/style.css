@@ -3,10 +3,43 @@
  */
 html {
     overflow-y: scroll;
+    background: #909090;
 }
 
 body {
+
+}
+
+.wrapper {
     margin: 8px auto;
-    background: #fff;
     width: 700px;
+}
+
+.bottom_image_static {
+    max-width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: -1px;
+}
+
+.bottom_image_dynamic {
+    max-width: 100%;
+    position: absolute;
+    left: -1px;
+}
+
+#root_index_footer_image {
+
+}
+
+#work_index_footer_image {
+
+}
+
+#hello_footer_image {
+
+}
+
+#try_footer_image {
+
 }
