@@ -1,6 +1,7 @@
 /**
  * A function to wrap it all in.
  */
+
 (function () {
     "use strict";
     if(document.title === "Report from the course sections") {
