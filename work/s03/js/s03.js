@@ -1,30 +1,20 @@
 
 
 (function () {
-    "use strict";
+    'use strict';
+    getData();
 
-    console.log("All ready.");
 }());
 
-function main() {
-    console.log("main");
-}
+function getData() {
+    fetch('https://api.scb.se/UF0109/v2/skolenhetsregister/sv/kommun/1081')
+    //fetch('data/1081.json')
+        .then((response) => {
+            return response.json();
+        })
+        .then((myJson) => {
+            console.log(myJson);
+        });
 
-function getDocumentTree() {
-    let allNodes = document.getElementsByTagName("img");
-
-    for (let i = 0;i < allNodes.length;i++){
-        console.log(allNodes.item(i).innerHTML);
-    }
-
-    console.log("getDocumentTree");
-}
-
-function getDocTree() {
-    let allNodes = document.getElementsByTagName("img");
-    console.log(allNodes.length);
-
-    for(let i = 0;i < allNodes.length;i++){
-        console.log(allNodes.item(i).tagName);
-    }
+    console.log('Sandbox MEGA is ready!');
 }
