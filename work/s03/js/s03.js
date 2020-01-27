@@ -7,8 +7,8 @@
 }());
 
 function getData() {
-    fetch('https://api.scb.se/UF0109/v2/skolenhetsregister/sv/kommun/1081')
-    //fetch('data/1081.json')
+    //fetch('https://api.scb.se/UF0109/v2/skolenhetsregister/sv/kommun/1081')
+    fetch('data/1081.json')
         .then((response) => {
             return response.json();
         })
