@@ -14,6 +14,7 @@
 function displayMessage(){
     let quote = "Non est ad astra mollis e terris via";
     window.status = quote;
-    document.getElementById("quote_paragraph").innerHTML = "Inserted by js > <b>" + quote + "</b> < Inserted by js";
+    document.getElementById("quote_paragraph").innerHTML =
+        "Inserted by js > <b>" + quote + "</b> < Inserted by js";
     console.log("Message showed");
 }
