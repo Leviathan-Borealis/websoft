@@ -6,10 +6,6 @@ html {
     background: #909090;
 }
 
-body {
-
-}
-
 .in_feed_img {
     border-style: solid;
     border-width: 3px;
@@ -46,18 +42,20 @@ body {
     background: #909090;
 }
 
-#root_index_footer_image {
-
+#json_data {
+    border: 2px solid #4d4d4c;
+    border-radius: 5px;
 }
 
-#work_index_footer_image {
-
+.table_key_value {
+   width: 100%;
 }
 
-#hello_footer_image {
-
+.value_cell {
+    text-align: end;
 }
 
-#try_footer_image {
-
+#column_labels{
+    font-size: large;
+    font-weight: bold;
 }
