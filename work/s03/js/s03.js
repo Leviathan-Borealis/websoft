@@ -108,8 +108,7 @@ function updateTableHTML(myArray,rootNode) {
 
 
 function getData() {
-    //fetch('https://api.scb.se/UF0109/v2/skolenhetsregister/sv/kommun/1081')
-    let test = fetch('data/1081.json')
+    let test = fetch("https://leviathan-borealis.github.io/websoft/work/s03/data/1081.json")
         .then((response) => {
             return response.json();
         })
