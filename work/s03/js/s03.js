@@ -4,7 +4,7 @@
     'use strict';
     let jsonData = getData();
     displayData(jsonData);
-
+    flySim();
 }());
 
 Date.prototype.yyyymmdd = function() {
@@ -114,7 +114,7 @@ function getData() {
             return response.json();
         })
         .then((myJson) => {
-            console.log(myJson);
+            //console.log(myJson);
             return myJson;
         });
 
@@ -122,65 +122,61 @@ function getData() {
     return test;
 }
 
-function duckHunt() {
+function flySim() {
     let area = document.body,
         areaHeight = window.innerHeight,
         areaWidth = window.innerWidth,
-        points = document.getElementById('points'),
-        duck = document.createElement('img'),
-        score = 0,
-        timer = 1000;
+        plane = document.createElement('img'),
+        dirX = 0,
+        dirY = -1,
+        timer = 100;
+
+    /**
+     * Set the attributes for the plane
+     **/
+    plane.src='img/flygplan.png';
+    plane.style.position ='absolute';
+    plane.style.left = '0px';
+    plane.style.top = '0px';
+    plane.style.zIndex = 10000;
+    //plane.addEventListener('click', addAndPrintScore);
+
 
 
     /**
-     * Keep track on score.
-     */
-    function addAndPrintScore() {
-        score = score +1;
-        points.innerHTML = score;
+     * A function for displaying the plane in random positions
+     **/
+    function spawnPlane() {
+        let newX = Math.floor(Math.random() * (areaWidth-plane.width)),
+            newY = Math.floor(Math.random() * (areaHeight-plane.height));
+
+        plane.style.left = newX+'px';
+        plane.style.top = newY+'px';
+        area.appendChild(plane);
+
+        window.setInterval(movePlane, timer);
     }
 
+    function movePlane() {
+        plane.style.left = Number.parseInt(plane.style.left.substr(0,plane.style.left.length - 2)) + dirX + "px";
+        plane.style.top = Number.parseInt(plane.style.top.substr(0,plane.style.top.length - 2)) + dirY + "px";
 
-
-    /**
-     * Set the attributes for the duck
-     **/
-    duck.src='img/flygplan.png';
-    duck.style.position ='absolute';
-    duck.style.left = '0px';
-    duck.style.top = '0px';
-    duck.style.zIndex = 10000;
-    duck.addEventListener('click', addAndPrintScore);
-
-
-
-    /**
-     * A function for displaying the duck in random positions
-     **/
-    function newDuck() {
-        let newX = Math.floor(Math.random() * (areaWidth-duck.width)),
-            newY = Math.floor(Math.random() * (areaHeight-duck.height));
-
-        duck.style.left = newX+'px';
-        duck.style.top = newY+'px';
-        area.appendChild(duck);
+        if(Number.parseInt(plane.style.left.substr(0,plane.style.left.length - 2)) === 0){
+            console.log("turn left 0");
+        } else if (Number.parseInt(plane.style.left.substr(0,plane.style.left.length - 2)) + plane.width === areaWidth){
+            console.log("turn max left");
+        } else if (Number.parseInt(plane.style.top.substr(0,plane.style.top.length - 2)) - plane.height <= 0) {
+            console.log("turn top 0");
+        } else if (Number.parseInt(plane.style.top.substr(0,plane.style.top.length - 2)) + (plane.height * 2) >= areaHeight){
+            console.log("turn top max");
+        }
     }
 
+    function turnPlane() {
 
 
-    /**
-     * The function that triggers the game, uses an time interval in milliseconds
-     **/
-    function startGame() {
-        window.setInterval(newDuck, timer);
     }
 
+    spawnPlane();
 
-
-    /**
-     * Start the game
-     **/
-    startGame();
-
-    console.log('Game is ready!');
 }
