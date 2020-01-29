@@ -21,6 +21,19 @@ html {
     border-radius: 10px;
 }
 
+#flag_section {
+    background: darkgray;
+    text-align: center;
+    align-content: center;
+    padding: 16px;
+    margin: 8px auto;
+    width: 600px;
+    border-radius: 10px;
+}
+#flag_frame {
+    min-width: 100%;
+}
+
 .bottom_image_static {
     max-width: 100%;
     position: absolute;
@@ -58,4 +71,12 @@ html {
 #column_labels{
     font-size: large;
     font-weight: bold;
+}
+
+.plane_button{
+    background: #cccccc;
+    border-radius: 10px;
+    padding: 4px 8px;
+    top: 10px;
+    left: 10px;
 }

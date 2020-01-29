@@ -23,6 +23,7 @@
     /**
      * Set the attributes for the duck
      **/
+
     duck.src='img/duck.png';
     duck.style.position ='absolute';
     duck.style.left = '0px';
