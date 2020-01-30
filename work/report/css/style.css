@@ -67,3 +67,8 @@ html {
     top: 10px;
     left: 10px;
 }
+
+#data_menu{
+    margin: 10px 0;
+    border-radius: 5px;
+}

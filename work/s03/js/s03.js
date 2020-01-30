@@ -6,6 +6,14 @@
     displayData(jsonData);
 }());
 
+function repopulateWithNewData() {
+    'use strict';
+    let element = document.getElementById("data_menu");
+    let datalabel = element.options[element.selectedIndex].value;
+    let jsonData = getData(datalabel + ".json");
+    displayData(jsonData);
+}
+
 Date.prototype.yyyymmdd = function() {
     let mm = this.getMonth() + 1;
     let dd = this.getDate();
@@ -107,8 +115,9 @@ function updateTableHTML(myArray,rootNode) {
 }
 
 
-function getData() {
-    let test = fetch("https://leviathan-borealis.github.io/websoft/work/s03/data/1081.json")
+function getData(datalabel = "1080.json") {
+
+    let test = fetch("https://leviathan-borealis.github.io/websoft/work/s03/data/" + datalabel)
         .then((response) => {
             return response.json();
         })
