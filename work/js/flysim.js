@@ -36,7 +36,7 @@ function flySim() {
     plane.style.position ='absolute';
     plane.style.left = '0px';
     plane.style.top = '0px';
-    plane.style.zIndex = 10000;
+    plane.style.zIndex = '10000';
     plane.style.transform = "rotate(" + 0 + "deg)";
     plane.addEventListener('click', changeCardinal);
 
