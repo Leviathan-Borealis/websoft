@@ -17,7 +17,6 @@ class PlaneObj {
         this.planeElement.style.zIndex = '10000';
         this.planeElement.style.transform = "rotate(" + 0 + "deg)";
         this.planeElement.addEventListener('click', this.turnPlane);
-        console.log("Constructor " + this.planeElement);
     }
 
     rotatePlane (deg) {
@@ -42,7 +41,6 @@ class PlaneObj {
         this.planeElement.style.top = (Math.floor(Math.random() * (window.innerHeight - this.planeElement.height))) + 'px';
         this.planeElement.style.transform = "rotate(" + 90 + "deg)";
         document.body.appendChild(this.planeElement);
-        console.log("showPlane " + this.planeElement);
         this.interval = window.setInterval(this.movePlaneObj, this.timer);
     }
 
@@ -59,7 +57,6 @@ class PlaneObj {
     }
 
     movePlaneObj () {
-        console.log("movePlaneObj " + aPlane.planeElement);
         aPlane.planeElement.style.left = Number.parseInt(aPlane.planeElement.style.left.substr(0, aPlane.planeElement.style.left.length - 2)) + aPlane.directionX + "px";
         aPlane.planeElement.style.top = Number.parseInt(aPlane.planeElement.style.top.substr(0, aPlane.planeElement.style.top.length - 2)) + aPlane.directionY + "px";
 
