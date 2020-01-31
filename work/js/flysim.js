@@ -60,6 +60,8 @@ class PlaneObj {
         aPlane.planeElement.style.left = Number.parseInt(aPlane.planeElement.style.left.substr(0, aPlane.planeElement.style.left.length - 2)) + aPlane.directionX + "px";
         aPlane.planeElement.style.top = Number.parseInt(aPlane.planeElement.style.top.substr(0, aPlane.planeElement.style.top.length - 2)) + aPlane.directionY + "px";
 
+        console.log("x:" + aPlane.planeElement.style.left + " y:" + aPlane.planeElement.style.top);
+
         if (Number.parseInt(aPlane.planeElement.style.left.substr(0, aPlane.planeElement.style.left.length - 2)) <= 0) {
             if(aPlane.directionX < 0) {
                 aPlane.rotatePlane(90);
