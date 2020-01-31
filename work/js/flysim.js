@@ -1,5 +1,54 @@
 let plane, button, paused, timer, interval, movePlane;
 
+let planeObj = {
+    planeElement: document.createElement('img'),
+    rotatePlane: function (deg) {
+        plane.style.transform = "rotate(" + deg + "deg)";
+        plane.style.transition = "transform .8s ease-in-out";
+    },
+    rotate180: function () {
+
+    },
+    showPlane: function () {
+        plane.style.left = (Math.floor(Math.random() * (areaWidth - plane.width))) + 'px';
+        plane.style.top = (Math.floor(Math.random() * (areaHeight - plane.height))) + 'px';
+        plane.style.transform = "rotate(" + 90 + "deg)";
+        area.appendChild(plane);
+        interval = window.setInterval(movePlane, timer);
+    },
+    freezeAndHidePlane: function () {
+
+    },
+    movePlaneObj: function () {
+
+        this.planeElement.style.left = Number.parseInt(this.planeElement.style.left.substr(0, this.planeElement.style.left.length - 2)) + dirX + "px";
+        plane.style.top = Number.parseInt(plane.style.top.substr(0, plane.style.top.length - 2)) + dirY + "px";
+
+
+        if (Number.parseInt(plane.style.left.substr(0, plane.style.left.length - 2)) <= 0) {
+            if(dirX < 0) {
+                this.rotatePlane(90);
+                dirX *= -1;
+            }
+        } else if (Number.parseInt(plane.style.left.substr(0, plane.style.left.length - 2)) + plane.width >= areaWidth) {
+            if(dirX > 0) {
+                this.rotatePlane(270);
+                dirX *= -1;
+            }
+        } else if (Number.parseInt(plane.style.top.substr(0, plane.style.top.length - 2)) <= 0) {
+            if(dirY < 0) {
+                this.rotatePlane(180);
+                dirY *= -1;
+            }
+        } else if (Number.parseInt(plane.style.top.substr(0, plane.style.top.length - 2)) + plane.height >= areaHeight) {
+            if(dirY > 0) {
+                this.rotatePlane(0);
+                dirY *= -1;
+            }
+        }
+    }
+};
+
 (function () {
     'use strict';
 
