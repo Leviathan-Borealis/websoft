@@ -7,6 +7,8 @@ class PlaneObj {
     directionX = 1;
     directionY = 0;
     planeElement = {};
+    screenTop = 0;
+    screenBottom = 0;
 
     constructor() {
         this.planeElement = document.createElement('img');
@@ -17,6 +19,14 @@ class PlaneObj {
         this.planeElement.style.zIndex = '10000';
         this.planeElement.style.transform = "rotate(" + 0 + "deg)";
         this.planeElement.addEventListener('click', this.turnPlane);
+        this.screenTop = window.pageYOffset;
+        this.screenBottom = window.innerHeight + window.pageYOffset;
+        window.onscroll = function() {getViewportTopBottom()};
+
+        function getViewportTopBottom() {
+            aPlane.screenTop = window.pageYOffset;
+            aPlane.screenBottom = window.innerHeight + window.pageYOffset;
+        }
     }
 
     rotatePlane (deg) {
@@ -60,8 +70,6 @@ class PlaneObj {
         aPlane.planeElement.style.left = Number.parseInt(aPlane.planeElement.style.left.substr(0, aPlane.planeElement.style.left.length - 2)) + aPlane.directionX + "px";
         aPlane.planeElement.style.top = Number.parseInt(aPlane.planeElement.style.top.substr(0, aPlane.planeElement.style.top.length - 2)) + aPlane.directionY + "px";
 
-        console.log("x:" + aPlane.planeElement.style.left + " y:" + aPlane.planeElement.style.top);
-
         if (Number.parseInt(aPlane.planeElement.style.left.substr(0, aPlane.planeElement.style.left.length - 2)) <= 0) {
             if(aPlane.directionX < 0) {
                 aPlane.rotatePlane(90);
@@ -72,15 +80,23 @@ class PlaneObj {
                 aPlane.rotatePlane(270);
                 aPlane.directionX *= -1;
             }
-        } else if (Number.parseInt(aPlane.planeElement.style.top.substr(0, aPlane.planeElement.style.top.length - 2)) <= 0) {
+        } else if (Number.parseInt(aPlane.planeElement.style.top.substr(0, aPlane.planeElement.style.top.length - 2)) <= aPlane.screenTop) {
             if(aPlane.directionY < 0) {
                 aPlane.rotatePlane(180);
-                aPlane.directionY *= -1;
+                aPlane.directionY = 1;
+            } else if (aPlane.directionX !== 0){
+                aPlane.directionX = 0;
+                aPlane.rotatePlane(180);
+                aPlane.directionY = 1;
             }
-        } else if (Number.parseInt(aPlane.planeElement.style.top.substr(0, aPlane.planeElement.style.top.length - 2)) + aPlane.planeElement.height >= window.innerHeight) {
+        } else if (Number.parseInt(aPlane.planeElement.style.top.substr(0, aPlane.planeElement.style.top.length - 2)) + aPlane.planeElement.height >= aPlane.screenBottom) {
             if(aPlane.directionY > 0) {
                 aPlane.rotatePlane(0);
-                aPlane.directionY *= -1;
+                aPlane.directionY = -1;
+            } else if (aPlane.directionX !== 0){
+                aPlane.directionX = 0;
+                aPlane.rotatePlane(0);
+                aPlane.directionY = -1;
             }
         }
     }
@@ -94,14 +110,12 @@ class PlaneObj {
 
 function flySim() {
     aPlane = new PlaneObj();
-
     button.addEventListener("click", pauseAndHide);
     button.style.position ='absolute';
     button.className = "plane_button";
     button.textContent = "Show/Hide plane";
     button.style.zIndex = "10000";
     document.body.appendChild(button);
-
     aPlane.showPlane();
 }
 
