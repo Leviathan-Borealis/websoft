@@ -1,83 +1,105 @@
+/**
+ * Script flying a plane over screen. Not utilizing class definition
+ * see script /work/js/flysim.js
+ */
 
-let area = document.body,
-    areaHeight = window.innerHeight,
-    areaWidth = window.innerWidth,
-    plane = document.createElement('img'),
-    dirX = 0,
-    dirY = -1,
-    timer = 100,
-    posWhenTurnEnds = {
-        posX: -1,
-        posY: -1
-    },
-    newHeading = 0;
+let button, aPlane;
 
-function turnPlane() {
-    newHeading = leftOrRight();
-    makeTurn();
-}
+function automaticPlaneFlight() {
+    'use strict';
+    button = document.createElement("button");
 
-function makeTurn() {
-    if(newHeading > 0){
-        //Turn to sb
+    aPlane = {
+        paused: false,
+        timer: 5,
+        interval: {},
+        directionX: 1,
+        directionY: 0,
+        planeElement: document.createElement('img'),
+        setUpPlane: function () {
+            aPlane.planeElement.src = '/websoft/work/js/flygplan.png';
+            aPlane.planeElement.style.position ='absolute';
+            aPlane.planeElement.style.left = '0px';
+            aPlane.planeElement.style.top = '0px';
+            aPlane.planeElement.style.zIndex = '10000';
+            aPlane.planeElement.style.transform = "rotate(" + 0 + "deg)";
+            aPlane.planeElement.addEventListener('click', this.turnPlane);
+        },
+        rotatePlane: function (deg) {
+            aPlane.planeElement.style.transform = "rotate(" + deg + "deg)";
+            aPlane.planeElement.style.transition = "transform .8s ease-in-out";
+        },
+        turnPlane: function () {
+            if(aPlane.directionX === 0){
+                aPlane.directionX = (Math.random() < 0.5)?-1:1;
+                aPlane.directionY = 0;
+                aPlane.rotatePlane((aPlane.directionX > 0) ? 90 : 270);
+            } else {
+                aPlane.directionY = (Math.random() < 0.5)?-1:1;
+                aPlane.directionX = 0;
+                aPlane.rotatePlane((aPlane.directionY < 0) ? 0 : 180);
+            }
+        },
+        showPlane: function () {
+            aPlane.planeElement.style.left = (Math.floor(Math.random() * (window.innerWidth - this.planeElement.width))) + 'px';
+            aPlane.planeElement.style.top = (Math.floor(Math.random() * (window.innerHeight - this.planeElement.height))) + 'px';
+            aPlane.planeElement.style.transform = "rotate(" + 90 + "deg)";
+            document.body.appendChild(this.planeElement);
+            aPlane.interval = window.setInterval(aPlane.movePlaneObj, aPlane.timer);
+        },
+        freezeAndHidePlane: function () {
+            if(!aPlane.paused) {
+                window.clearInterval(aPlane.interval);
+                document.body.removeChild(aPlane.planeElement);
+                aPlane.paused = true;
+            } else {
+                aPlane.interval = window.setInterval(aPlane.movePlaneObj,aPlane.timer);
+                document.body.appendChild(aPlane.planeElement);
+                aPlane.paused = false;
+            }
+        },
+        movePlaneObj: function () {
+            aPlane.planeElement.style.left = Number.parseInt(aPlane.planeElement.style.left.substr(0, aPlane.planeElement.style.left.length - 2)) + aPlane.directionX + "px";
+            aPlane.planeElement.style.top = Number.parseInt(aPlane.planeElement.style.top.substr(0, aPlane.planeElement.style.top.length - 2)) + aPlane.directionY + "px";
 
-        if(dirX > 0 && dirY === 0){
-            posWhenTurnEnds = getPosWhenTurnEnds();
-            plane.style.transform = "rotate(" + 45 + "deg)";
-            dirY = 1;
-        } else if (dirX < 0 && dirY === 0){
-            dirY = -1;
-        } else {
-            //Performing turn
-            if ((posWhenTurnEnds.posX ===
-                Number.parseInt(plane.style.left.substr(0, plane.style.left.length - 2))) ||
-                (posWhenTurnEnds.posY === Number.parseInt(plane.style.top.substr(0, plane.style.top.length - 2)))){
-                newHeading = 0;
-                plane.style.transform = "rotate(" + 45 + "deg)";
+            if (Number.parseInt(aPlane.planeElement.style.left.substr(0, aPlane.planeElement.style.left.length - 2)) <= 0) {
+                if(aPlane.directionX < 0) {
+                    aPlane.rotatePlane(90);
+                    aPlane.directionX *= -1;
+                }
+            } else if (Number.parseInt(aPlane.planeElement.style.left.substr(0, aPlane.planeElement.style.left.length - 2)) + aPlane.planeElement.width >= window.innerWidth) {
+                if(aPlane.directionX > 0) {
+                    aPlane.rotatePlane(270);
+                    aPlane.directionX *= -1;
+                }
+            } else if (Number.parseInt(aPlane.planeElement.style.top.substr(0, aPlane.planeElement.style.top.length - 2)) <= 0) {
+                if(aPlane.directionY < 0) {
+                    aPlane.rotatePlane(180);
+                    aPlane.directionY *= -1;
+                }
+            } else if (Number.parseInt(aPlane.planeElement.style.top.substr(0, aPlane.planeElement.style.top.length - 2)) + aPlane.planeElement.height >= window.innerHeight) {
+                if(aPlane.directionY > 0) {
+                    aPlane.rotatePlane(0);
+                    aPlane.directionY *= -1;
+                }
             }
         }
-    } else {
-        //Turn to the left
+    };
 
-    }
+
+
+    button.addEventListener("click", pauseAndHide);
+    button.style.position ='absolute';
+    button.className = "plane_button";
+    button.textContent = "Show/Hide plane";
+    button.style.zIndex = "10000";
+    document.body.appendChild(button);
+
+    aPlane.setUpPlane();
+    aPlane.showPlane();
 }
 
-function getPosWhenTurnEnds() {
-
+function pauseAndHide() {
+    aPlane.freezeAndHidePlane();
 }
 
-function leftOrRight() {
-    let directionToTurn = 0;
-    if(dirX !== 0){
-        //Moving horizontally
-
-        if (Number.parseInt(plane.style.top.substr(0,plane.style.top.length - 2)) - plane.height <= 0) {
-            //Plane should turn down
-            directionToTurn = -1;
-        } else {
-            //Plane should turn up
-            directionToTurn = 1;
-        }
-
-        if(dirX > 0){
-            return directionToTurn * -1;
-        }
-        return directionToTurn;
-
-    } else {
-        //Moving vertical
-
-        if(Number.parseInt(plane.style.left.substr(0,plane.style.left.length - 2)) === 0){
-            //Turn to right part of screen
-            directionToTurn = 1;
-        } else {
-            //Turn to left part of screen
-            directionToTurn = -1;
-        }
-
-        if(dirY > 0){
-            return directionToTurn * -1;
-        }
-        return directionToTurn;
-    }
-}
