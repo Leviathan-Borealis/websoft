@@ -3,6 +3,7 @@
 <h2>Today's lotto numbers are...</h2>
 <%
  var jsonData = JSON.parse(numbers);
+ console.info(jsonData);
  %>
 
 <div id="content">
@@ -22,20 +23,15 @@
         {
             var label;
             var cellClass = "label_row";
-            if(i === 0){
+            if(i === 0 && range === 2){
                 cellClass += " left_column";
+                label = "Submitted numbers"
+            } else if(i === 0 && range === 1){
+                cellClass += " left_column";
+                label = "Lotto numbers";
             } else {
                 cellClass += " right_column";
-            }
-            switch (i) {
-                case 0:{
-                    label = "Submitted numbers"
-                    break
-                }
-                case 1:{
-                    label = "Lotto numbers"
-                    break
-                }
+                label = "Lotto numbers";
             }
             %>
             <td class="<%=cellClass%>"><%= label %></td>
@@ -45,20 +41,27 @@
         </tr>
 
         <%
-        for(var ii = 0;ii < 7;ii++){
+
+            for(var ii = 0;ii < 7;ii++){
         %>
         <tr>
             <%
                 cellClass = "left_column"
-                if(jsonData["correctIndexes"].includes(ii)){
-                    cellClass += " cell_hit";
-                }
+                if(range > 1) {
+                    if (jsonData["correctIndexes"].includes(ii)) {
+                        cellClass += " cell_hit";
+                    }
+
             %>
             <td class="<%= cellClass %>"><%= (JSON.parse(jsonData["submitted"])[ii]) %></td>
+            <%
+                }
+            %>
             <td class="right_column"><%= (JSON.parse(jsonData["drawn"])[ii]) %></td>
         </tr>
             <%
-        }
+            }
+
             %>
     </table>
 </div>

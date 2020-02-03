@@ -14,7 +14,7 @@ router.get("/lotto", (req, res) => {
     if(jsonResponse.hasOwnProperty("submitted")){
         data.numbers = JSON.stringify(jsonResponse);
     } else {
-        data.numbers = JSON.stringify(jsonResponse["drawn"]);
+        data.numbers = JSON.stringify(jsonResponse);
     }
     res.render("lotto", data);
 });
