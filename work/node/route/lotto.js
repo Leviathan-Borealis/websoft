@@ -61,5 +61,4 @@ function drawNumbers(queryString){
         return JSON.stringify(returnObj);
     }
 }
-
 module.exports = router;

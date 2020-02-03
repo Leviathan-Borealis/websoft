@@ -1,2 +1,42 @@
-<h1>Todays lotto numbers are...</h1>
-<p><%= numbers %></p>
+<link href="css/table.css" rel="stylesheet" type="text/css">
+
+<h1>Today's lotto numbers are...</h1>
+<%
+ var jsonData = JSON.parse(numbers);
+ %>
+
+<div id="content">
+    <table id="json_data" class="root_table">
+        <tr>
+        <%
+        var labels = Object.keys(jsonData);
+        for (let i = 0;i < 3;i++)
+        {
+            %>
+            <td>
+            <%= labels[i] %>
+            </td>
+            <%
+        }
+        %>
+        </tr>
+
+        <%
+        for(let ii = 0;ii < 7;ii++){
+        %>
+        <tr>
+            <%
+                var cellStyle = "";
+                if(jsonData["correctIndexes"].includes(ii)){
+                    cellStyle = "bgcolor=green";
+                }
+                console.info(jsonData["correctIndexes"].includes(ii));
+            %>
+            <td <%= cellStyle %>><%= (JSON.parse(jsonData["submitted"])[ii]) %></td>
+            <td><%= (JSON.parse(jsonData["drawn"])[ii]) %></td>
+        </tr>
+            <%
+        }
+            %>
+    </table>
+</div>
