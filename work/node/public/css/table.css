@@ -3,6 +3,13 @@
     border-radius: 5px;
     border-collapse: collapse;
 }
+.wrapper{
+    text-align: center;
+}
+table#json_data{
+    margin-left:auto;
+    margin-right:auto;
+}
 .left_column{
     max-width: 110px;
     text-align: center;
@@ -18,4 +25,7 @@
 }
 .cell_hit{
     background: green;
+}
+.scored_hits{
+    border-top: 2px solid #4d4d4c;
 }

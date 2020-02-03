@@ -1,5 +1,6 @@
 <link href="css/table.css" rel="stylesheet" type="text/css">
-
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<div class="wrapper">
 <h2>Today's lotto numbers are...</h2>
 <%
  var jsonData = JSON.parse(numbers);
@@ -61,7 +62,16 @@
         </tr>
             <%
             }
-
+            if(range > 1){
+                if(jsonData["correctIndexes"].length > 0){
+            %>
+        <tr class="scored_hits">
+            <td colspan="2">You scored <%= jsonData["correctIndexes"].length  %> hits</td>
+        </tr>
+            <%
+                }
+            }
             %>
     </table>
+</div>
 </div>
