@@ -39,6 +39,7 @@ function drawNumbers(queryString){
             }
         } else {
             console.info("No query was submitted");
+            submittedLottoNumbers = [];
         }
     }
 
