@@ -1,10 +1,21 @@
 #json_data {
     border: 2px solid #4d4d4c;
     border-radius: 5px;
+    border-collapse: collapse;
 }
-.leftColumn{
-
+.left_column{
+    max-width: 110px;
+    text-align: center;
 }
-.rightColumn{
+.right_column{
+    min-width: 110px;
+    max-width: 110px;
+    text-align: center;
     border-left: 2px solid #4d4d4c;
+}
+.label_row{
+    border-bottom: 2px solid #4d4d4c;
+}
+.cell_hit{
+    background: green;
 }

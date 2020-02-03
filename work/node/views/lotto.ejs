@@ -1,6 +1,6 @@
 <link href="css/table.css" rel="stylesheet" type="text/css">
 
-<h1>Today's lotto numbers are...</h1>
+<h2>Today's lotto numbers are...</h2>
 <%
  var jsonData = JSON.parse(numbers);
  %>
@@ -10,30 +10,52 @@
         <tr>
         <%
         var labels = Object.keys(jsonData);
-        for (let i = 0;i < 3;i++)
-        {
+        var range = labels.length;
+        if(range === 3){
             %>
-            <td>
-            <%= labels[i] %>
-            </td>
+            <p>Hits are marked in green</p>
+            <%
+            range = 2;
+        }
+
+        for (var i = 0;i < range;i++)
+        {
+            var label;
+            var cellClass = "label_row";
+            if(i === 0){
+                cellClass += " left_column";
+            } else {
+                cellClass += " right_column";
+            }
+            switch (i) {
+                case 0:{
+                    label = "Submitted numbers"
+                    break
+                }
+                case 1:{
+                    label = "Lotto numbers"
+                    break
+                }
+            }
+            %>
+            <td class="<%=cellClass%>"><%= label %></td>
             <%
         }
         %>
         </tr>
 
         <%
-        for(let ii = 0;ii < 7;ii++){
+        for(var ii = 0;ii < 7;ii++){
         %>
         <tr>
             <%
-                var cellStyle = "";
+                cellClass = "left_column"
                 if(jsonData["correctIndexes"].includes(ii)){
-                    cellStyle = "bgcolor=green";
+                    cellClass += " cell_hit";
                 }
-                console.info(jsonData["correctIndexes"].includes(ii));
             %>
-            <td <%= cellStyle %>><%= (JSON.parse(jsonData["submitted"])[ii]) %></td>
-            <td><%= (JSON.parse(jsonData["drawn"])[ii]) %></td>
+            <td class="<%= cellClass %>"><%= (JSON.parse(jsonData["submitted"])[ii]) %></td>
+            <td class="right_column"><%= (JSON.parse(jsonData["drawn"])[ii]) %></td>
         </tr>
             <%
         }
