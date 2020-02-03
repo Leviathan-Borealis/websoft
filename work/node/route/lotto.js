@@ -27,13 +27,15 @@ function drawNumbers(queryString){
 
     let submittedLottoNumbers = [];
     //Check if there was query data
-    console.info(typeof queryString);
+
     if(queryString !== null && typeof queryString === "string") {
         if (queryString.length > 4 && queryString.includes(",")){
             queryString = queryString.substr(4);
             submittedLottoNumbers = queryString.split(',').map(Number);
             if(submittedLottoNumbers.length !== 7){
+                console.info(submittedLottoNumbers.length);
                 console.info("Submitted numbers was of invalid format")
+                submittedLottoNumbers = [];
             }
         } else {
             console.info("No query was submitted");
