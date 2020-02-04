@@ -117,7 +117,7 @@ function updateTableHTML(myArray,rootNode) {
 
 function getData(datalabel = "1080.json") {
 
-    let test = fetch("https://leviathan-borealis.github.io/websoft/work/s03/data/" + datalabel)
+    let test = fetch("https://leviathan-borealis.github.io/websoft/work/report/s03/data/" + datalabel)
         .then((response) => {
             return response.json();
         })
