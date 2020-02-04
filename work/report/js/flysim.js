@@ -12,7 +12,7 @@ class PlaneObj {
 
     constructor() {
         this.planeElement = document.createElement('img');
-        this.planeElement.src='/websoft/work/report/js/flygplan.png';
+        this.planeElement.src='https://leviathan-borealis.github.io/websoft/work/report/js/flygplan.png';
         this.planeElement.style.position ='absolute';
         this.planeElement.style.left = '0px';
         this.planeElement.style.top = '0px';
