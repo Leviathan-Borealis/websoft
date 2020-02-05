@@ -1,0 +1,17 @@
+
+
+#flag_section {
+    background: darkgray;
+    text-align: center;
+    align-content: center;
+    padding: 16px;
+    margin: 8px auto;
+    width: 600px;
+    border-radius: 10px;
+}
+#flag_frame {
+    overflow-y: hidden;
+    border: 0;
+    width: 600px;
+    height: 250px;
+}

@@ -1,0 +1,50 @@
+<?php
+
+?>
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <title>About this site</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <a class="button_links" href="me.php">Me</a> |
+                <a class="button_links" href="report.php">Report</a> |
+                <a class="button_links" href="about.php">About</a>
+                <a class="button_links" href="s03/schools.html">Schools</a>
+                <a class="button_links" href="s03/flag.html">Flag</a>
+            </nav>
+        </header>
+
+        <article>
+            <h1>About</h1>
+            <p>This website is part of the course <a class="button_links" href="https://www.hkr.se/en/course/DA377B">Software Development for the Web</a></p>
+            <p>The intention is to use this site as a training ground for students to try out techniques as HTML,CSS or Javascript for creating
+                navigable sites with some dynamic functionality</p>
+            <p>Later in the course other techniques will be introduced and implemented. PHP, Node.JS and .Net are some examples.</p>
+            <img class="in_feed_img" src="img/webdev.jpg">
+            <br>
+            <p>The <a class="button_links" href="https://github.com/Leviathan-Borealis/websoft">source code</a> for this
+                site is a fork from the course repository</p>
+
+            <p>If you want more information I recommend visiting the course repository
+                <a class="button_links" href="https://github.com/Webbprogrammering/websoft">WebSoft</a>
+                where further information can be obtained</p>
+        </article>
+    </div>
+
+    <footer>
+        <img class="bottom_image_dynamic" src="img/footer_slim.png">
+    </footer>
+
+    <script type="text/javascript" src="js/main.js"></script>
+    <script src="js/flysim.js"></script>
+</body>
+</html>
