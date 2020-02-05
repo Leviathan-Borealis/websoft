@@ -1,4 +1,12 @@
 <?php
+/*
+    session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
+    $_SESSION['ram_var'] = "about";
+    //In sub php
+    $_SESSION['ram_var'] ?>
+*/
+session_start(); // this NEEDS TO BE AT THE TOP of the page before any output etc
+$_SESSION['footer_type'] = "bottom_image_dynamic";
 
 ?>
 <!doctype html>
@@ -13,15 +21,8 @@
 
 <body>
     <div class="wrapper">
-        <header>
-            <nav>
-                <a class="button_links" href="me.php">Me</a> |
-                <a class="button_links" href="report.php">Report</a> |
-                <a class="button_links" href="about.php">About</a>
-                <a class="button_links" href="s03/schools.html">Schools</a>
-                <a class="button_links" href="s03/flag.html">Flag</a>
-            </nav>
-        </header>
+
+        <?php require "../views/header.php"?>
 
         <article>
             <h1>About</h1>
@@ -40,9 +41,9 @@
         </article>
     </div>
 
-    <footer>
-        <img class="bottom_image_dynamic" src="img/footer_slim.png">
-    </footer>
+    <?php
+        include "../views/footer.php";
+    ?>
 
     <script type="text/javascript" src="js/main.js"></script>
     <script src="js/flysim.js"></script>

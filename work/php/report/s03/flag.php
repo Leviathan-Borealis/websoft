@@ -8,15 +8,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <header>
-        <nav>
-            <a class="button_links" href="../me.php">Me</a> |
-            <a class="button_links" href="../report.php">Report</a> |
-            <a class="button_links" href="../about.php">About</a>
-            <a class="button_links" href="schools.html">Schools</a>
-            <a class="button_links" href="flag.html">Flag</a>
-        </nav>
-    </header>
+    <?php require "../../views/header.php"?>
     <h1>Click links to view corresponding flag</h1>
     <section id="flag_section">
         <div>

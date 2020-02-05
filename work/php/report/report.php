@@ -19,8 +19,8 @@
         <a class="button_links" href="me.php">Me</a> |
         <a class="button_links" href="report.php">Report</a> |
         <a class="button_links" href="about.php">About</a>
-        <a class="button_links" href="s03/schools.html">Schools</a>
-        <a class="button_links" href="s03/flag.html">Flag</a>
+        <a class="button_links" href="s03/schools.php">Schools</a>
+        <a class="button_links" href="s03/flag.php">Flag</a>
     </nav>
 </header>
 
