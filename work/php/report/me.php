@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+$_SESSION['footer_type'] = "bottom_image_dynamic";
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,17 +18,7 @@ Comments are written as HTML style.
 -->
 
     <div class="wrapper">
-        <header>
-            <nav>
-                <a class="button_links" href="me.php">Me</a> |
-                <a class="button_links" href="report.php">Report</a> |
-                <a class="button_links" href="about.php">About</a>
-                <a class="button_links" href="s03/schools.php">Schools</a>
-                <a class="button_links" href="s03/flag.php">Flag</a>
-            </nav>
-        </header>
-
-
+        <?php require "../views/header.php"?>
 
         <article>
 
@@ -50,9 +41,9 @@ Comments are written as HTML style.
         </article>
     </div>
 
-    <footer>
-        <img class="bottom_image_dynamic" src="../report/img/footer_slim.png">
-    </footer>
+    <?php
+        include "../views/footer.php";
+    ?>
 
     <script type="text/javascript" src="js/main.js"></script>
     <script src="js/flysim.js"></script>

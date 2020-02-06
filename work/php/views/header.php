@@ -7,6 +7,7 @@
         <a class="button_links" href="/websoft/work/php/report/about.php">About</a>
         <a class="button_links" href="/websoft/work/php/report/s03/schools.php">Schools</a>
         <a class="button_links" href="/websoft/work/php/report/s03/flag.php">Flag</a>
+        <a class="button_links" href="/websoft/work/php/report/search.php">Search</a>
     </nav>
 </header>
 <p></p>

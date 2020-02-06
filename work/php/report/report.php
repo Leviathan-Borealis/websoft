@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+$_SESSION['footer_type'] = "bottom_image_dynamic";
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,19 +14,7 @@
 <body>
 
 <div class="wrapper">
-
-<header>
-    <nav>
-        <a class="button_links" href="me.php">Me</a> |
-        <a class="button_links" href="report.php">Report</a> |
-        <a class="button_links" href="about.php">About</a>
-        <a class="button_links" href="s03/schools.php">Schools</a>
-        <a class="button_links" href="s03/flag.php">Flag</a>
-    </nav>
-</header>
-
-
-
+    <?php require "../views/header.php"?>
 <article>
 
 <header>
@@ -192,9 +181,9 @@
 
 </div>
 
-<footer>
-    <img class=bottom_image_dynamic src="img/footer_slim.png">
-</footer>
+<?php
+    include "../views/footer.php";
+?>
 
 <script type="text/javascript" src="js/main.js"></script>
 <script type='text/javascript' src='js/bug-min.js'></script>
