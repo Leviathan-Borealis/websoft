@@ -17,7 +17,7 @@ if ($search) {
     $db = connectDatabase($dsn);
 
     // Prepare and execute the SQL statement
-    $sql = <<<EOD
+  $sql = <<<EOD
 SELECT
     *
 FROM websoft.programming_lang
@@ -26,6 +26,7 @@ WHERE
     OR intended_use LIKE ?
 ;
 EOD;
+
     $stmt = $db->prepare($sql);
     $stmt->execute([$search, $like]);
 
@@ -70,7 +71,7 @@ EOD;
                     <th>Generic</th>
                     <th>Reflective</th>
                     <th>Event-drive</th>
-                    <th>Other_paradigms</th>
+                    <th>Other paradigms</th>
                     <th>Standardized</th>
                 </tr>
 
@@ -95,6 +96,11 @@ EOD;
     </div>
 
     <?php
+        if($search && $res != null) {
+            if (sizeof($res) > 7) {
+                $_SESSION['footer_type'] = "bottom_image_dynamic";
+            }
+        }
         include "../views/footer.php";
     ?>
 
