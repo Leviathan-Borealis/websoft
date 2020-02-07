@@ -2,8 +2,8 @@
 /**
  * A page controller
  */
-require "config.php";
-require "src/functions.php";
+require "../db-values/config.php";
+require "../db-values/functions.php";
 
 // Get incoming values
 $search = $_GET["search"] ?? null;
@@ -18,11 +18,11 @@ if ($search) {
     $sql = <<<EOD
 SELECT
     *
-FROM tech
+FROM websoft.programming_lang
 WHERE
     id = ?
-    OR label LIKE ?
-    OR type LIKE ?
+    OR language LIKE ?
+    OR intended_use LIKE ?
 ;
 EOD;
     $stmt = $db->prepare($sql);
@@ -48,15 +48,34 @@ EOD;
 <?php if ($search) : ?>
     <table>
         <tr>
-            <th>Label</th>
-            <th>Type</th>
+            <th>id</th>
+            <th>language</th>
+            <th>intended_use</th>
+            <th>imperative</th>
+            <th>object-oriented</th>
+            <th>functional</th>
+            <th>procedural</th>
+            <th>generic</th>
+            <th>reflective</th>
+            <th>event-drive</th>
+            <th>other_paradigms</th>
+            <th>standardized</th>
         </tr>
 
     <?php foreach ($res as $row) : ?>
         <tr>
             <td><?= $row["id"] ?></td>
-            <td><?= $row["label"] ?></td>
-            <td><?= $row["type"] ?></td>
+            <td><?= $row["language"] ?></td>
+            <td><?= $row["intended_use"] ?></td>
+            <td><?= $row["imperative"] ?></td>
+            <td><?= $row["object-oriented"] ?></td>
+            <td><?= $row["functional"] ?></td>
+            <td><?= $row["procedural"] ?></td>
+            <td><?= $row["generic"] ?></td>
+            <td><?= $row["reflective"] ?></td>
+            <td><?= $row["event-driven"] ?></td>
+            <td><?= $row["other_paradigms"] ?></td>
+            <td><?= $row["standardized"] ?></td>
         </tr>
     <?php endforeach; ?>
 

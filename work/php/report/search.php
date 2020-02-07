@@ -1,16 +1,35 @@
 <?php
-session_start();
-$_SESSION['footer_type'] = "bottom_image_dynamic";
-$searchParam = $_POST["search_param"] ?? null;
+/**
+ * A page controller
+ */
+require "../db-values/config.php";
+require "../db-values/functions.php";
 
-if($searchParam != null){
-    //Search database
+// Get incoming values
+$search = $_GET["search"] ?? null;
+$like = "%$search%";
+//var_dump($_GET);
 
+if ($search) {
+    // Connect to the database
+    $db = connectDatabase($dsn);
 
+    // Prepare and execute the SQL statement
+    $sql = <<<EOD
+SELECT
+    *
+FROM websoft.programming_lang
+WHERE
+    language = ?
+    OR intended_use LIKE ?
+;
+EOD;
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$search, $like]);
+
+    // Get the results as an array with column names as array keys
+    $res = $stmt->fetchAll();
 }
-
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -25,21 +44,51 @@ if($searchParam != null){
 <body>
 
     <div class="wrapper">
-        <?php require "../views/header.php";
-        if($searchParam == null) {
-            ?>
-            <p>Search database</p>
-            <form action="search.php" method="post">
-                <input type="text" name="search_param">
-                <input type="submit" value="Submit">
-            </form>
-        <?php
-        } else {
-        ?>
-            <p>Submitted search params <?=$searchParam?></p>
-        <?php
-        }
-        ?>
+        <?php require "../views/header.php";?>
+        <h1>Search the database</h1>
+
+        <form>
+            <p>
+                <label>Search:
+                    <input type="text" name="search" value="<?= $search ?>">
+                </label>
+            </p>
+        </form>
+
+        <?php if ($search) : ?>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Intended use</th>
+                    <th>Imperative</th>
+                    <th>Object-oriented</th>
+                    <th>Functional</th>
+                    <th>Procedural</th>
+                    <th>Generic</th>
+                    <th>Reflective</th>
+                    <th>Event-drive</th>
+                    <th>Other_paradigms</th>
+                    <th>Standardized</th>
+                </tr>
+
+                <?php foreach ($res as $row) : ?>
+                    <tr>
+                        <td><?= $row["language"] ?></td>
+                        <td><?= $row["intended_use"] ?></td>
+                        <td><?= $row["imperative"] ?></td>
+                        <td><?= $row["object-oriented"] ?></td>
+                        <td><?= $row["functional"] ?></td>
+                        <td><?= $row["procedural"] ?></td>
+                        <td><?= $row["generic"] ?></td>
+                        <td><?= $row["reflective"] ?></td>
+                        <td><?= $row["event-driven"] ?></td>
+                        <td><?= $row["other_paradigms"] ?></td>
+                        <td><?= $row["standardized"] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+
+            </table>
+        <?php endif; ?>
     </div>
 
     <?php
