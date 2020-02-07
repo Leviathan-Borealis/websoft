@@ -1,0 +1,29 @@
+.wrapper {
+    background: darkgray;
+    padding: 16px;
+    margin: 8px auto;
+    width: max-content;
+    min-width: 700px;
+    border-radius: 10px;
+}
+
+table{
+    background:#7a7a79;
+    border-radius: 5px;
+}
+
+td{
+    min-width: 50px;
+    max-width: 150px;
+    word-wrap: break-word;
+}
+
+tr{
+    background: darkgray;
+}
+
+table, tr, th, td{
+    border: #7a7a79 1px solid;
+    border-spacing: 1px;
+    text-align: center;
+}

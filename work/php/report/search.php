@@ -4,6 +4,8 @@
  */
 require "../db-values/config.php";
 require "../db-values/functions.php";
+session_start();
+$_SESSION['footer_type'] = "bottom_image_static";
 
 // Get incoming values
 $search = $_GET["search"] ?? null;
@@ -38,6 +40,7 @@ EOD;
     <meta charset="utf-8">
     <title>Search</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/search.css">
     <link rel="icon" href="favicon.ico">
 </head>
 
@@ -45,7 +48,7 @@ EOD;
 
     <div class="wrapper">
         <?php require "../views/header.php";?>
-        <h1>Search the database</h1>
+        <h2>Search the database</h2>
 
         <form>
             <p>
