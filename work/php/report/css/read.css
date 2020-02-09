@@ -1,0 +1,90 @@
+.wrapper {
+    background: darkgray;
+    padding: 16px;
+    margin: 8px auto;
+    width: max-content;
+    min-width: 700px;
+    border-radius: 10px;
+}
+
+table{
+    background:#7a7a79;
+    border-radius: 5px;
+}
+
+td{
+    width: 220px;
+    word-wrap: break-word;
+}
+
+tr{
+    background: darkgray;
+}
+
+table, tr, th, td{
+    border: #7a7a79 1px solid;
+    border-spacing: 1px;
+    text-align: center;
+}
+
+.id_cell{
+    width: 50px;
+}
+.data_cell{
+    width: 220px;
+}
+
+.buttonCell{
+    margin: 0;
+    padding: 0;
+    size: auto;
+}
+
+#create_cell{
+    max-width: fit-content;
+    text-align: left;
+}
+
+.create_label {
+    display: inline;
+}
+.create_input {
+    margin: 0;
+    padding: 0;
+    width: 217px;
+    display: inline;
+}
+
+/*
+.container {
+  max-width: 200px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1.125em;
+}
+
+.setter {
+  display: inline-block;
+}
+
+.wrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+<div class="container">
+  <div id="setter">
+    <span>some variable content</span>
+  </div>
+
+  <div class="wrap">
+    <span>
+      lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    </span>
+  </div>
+</div>
+ */
