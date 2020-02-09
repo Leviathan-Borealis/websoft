@@ -1,17 +1,24 @@
-Answer, or reflect upon, the following questions. Write freely, between 15 to 30  sentences.
-Did you before know about the techniques Git, GitHub, Markdown and/or GitHub Pages?
+I have prior experience and feel experienced in GIT. I have been hosting a git-server since 2,5years and been
+the main code administrator during past projects. Of course I do not know everything but I have enough knowledge to
+find solutions to the more advanced problems when they arise.
 
-GIT: Yes, experienced. Hosting a GitLab server since 2,5years
-GitHub: Yes, some experience. Haven't used it that much due to using my own server
-Markdown: Yes but only limited.
-GitHub pages: Some but only limited
+GitHub: Yes, some experience. I also have som e experience using GitLab. Haven't used either of them that much due to
+I have been using my own git-server.
 
-Have you ever created websites before?
-Yes I have. Both in pure HTML/Flash and in HTML/CSS/JS(React/TypeScript)
+Markdown:
+I have only limited experience of markdown. I get around and know the basics but I do not know it by heart
 
-Briefly explain your experience and knowledge of web application development.
-I would describe my experience as limited regarding web development.
-The Dynamic typing and working with UI feels challenging and confusing.
+GitHub pages:
+I have some previous experience with GitHub pages but only limited of the same reason as stated above
 
-What is your TIL for this course section?
-Many new names on frameworks.
+Creating web pages:
+I do have some previous experience in creating websites. Both in pure HTML/Flash and in HTML/CSS/JS(React/TypeScript).
+As stated before, I have some knowledge but it's just the basics.
+
+I would describe my previous experience in web development as overall limited. I get things done but it takes some time
+and research due to lack of experience and knowledge. Why haven't I developed that much for web? The dynamic typing in
+JS is confusing for me that normally use C/C++ and Android/Java. And when working with UX/UI I often find myself
+lacking ideas for design.
+
+Today I learned about some new frameworks and techniques used for web-development. As I said before,
+its a jungle out there. And there is always something new...
