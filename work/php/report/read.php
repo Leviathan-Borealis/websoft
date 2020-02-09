@@ -4,20 +4,40 @@
  */
 require "../db-values/config.php";
 require "../db-values/functions.php";
+
 session_start();
 $_SESSION['footer_type'] = "bottom_image_static";
 
 $nameIn = $_POST["nameIn"] ?? null;
 $descIn = $_POST["descIn"] ?? null;
 $authorIn = $_POST["authorIn"] ?? null;
-$testing = $_POST["DeleteItem"] ?? null;
-
-
+$delete_id = $_POST["DeleteItem"] ?? null;
+$update_id = $_POST["UpdateItem"] ?? null;
+$set_id = $_POST["SetItem"] ?? null;
+$insertVar = $_POST["insert"] ?? null;
+$test = null;
 
 
 
 // Connect to the database
 $db = connectDatabase($dsn);
+
+if($insertVar && $nameIn && $descIn && $authorIn) {
+    $sql = "INSERT INTO websoft.test_table (name, description, Author) VALUES (?, ?, ?)";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$nameIn, $descIn, $authorIn]);
+}
+
+if($set_id && $nameIn && $descIn && $authorIn) {
+    $sql = "UPDATE websoft.test_table SET name = ?, description = ?,Author = ? WHERE id = ?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$nameIn, $descIn, $authorIn, $set_id]);
+}
+if ($delete_id) {
+    $sql = "DELETE FROM websoft.test_table WHERE id = ?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$delete_id]);
+}
 
 // Prepare and execute the SQL statement
 $sql = <<<EOD
@@ -50,10 +70,9 @@ $res = $stmt->fetchAll();
 <div class="wrapper">
     <?php require "../views/header.php";?>
     <h2>Work the database</h2>
-    <p><?="Just testing: " . $nameIn . " " . $descIn . " " . $authorIn . " " . $testing?></p>
         <table>
             <tr>
-                <th></th>
+                <th colspan="2"></th>
                 <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
@@ -62,6 +81,12 @@ $res = $stmt->fetchAll();
 
             <?php foreach ($res as $row) : ?>
                 <tr>
+                    <td class="id_cell">
+                        <form method="post">
+                            <input type="hidden" name="UpdateItem" value="<?= $row["id"]?>">
+                            <input type="submit" name="update" value="Update">
+                        </form>
+                    </td>
                     <td class="id_cell">
                         <form method="post">
                             <input type="hidden" name="DeleteItem" value="<?= $row["id"]?>">
@@ -73,9 +98,42 @@ $res = $stmt->fetchAll();
                     <td><?= $row["description"] ?></td>
                     <td><?= $row["Author"] ?></td>
                 </tr>
+                <?php
+            if ($update_id){
+                if($update_id == $row["id"]){
+                    $nameIn = $row["name"];
+                    $descIn = $row["description"];
+                    $authorIn = $row["Author"];
+                    ?> <tr>
+                        <td colspan="2" class="id_cell"></td>
+                        <td colspan="4" id="create_cell">
+                            <form method="post">
+                                <input type="hidden" name="SetItem" value="<?= $row["id"]?>">
+                                <input class="id_cell buttonCell" type="submit" name="set" value="Set">
+                                <label class="create_label">
+                                    <input class="create_input" type="text" name="nameIn" value="<?= $nameIn?>">
+                                </label>
+                                <label class="create_label">
+                                    <input class="create_input" type="text" name="descIn" value="<?= $descIn?>">
+                                </label>
+                                <label class="create_label">
+                                    <input class="create_input" type="text" name="authorIn" value="<?= $authorIn?>">
+                                </label>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
             <?php endforeach; ?>
+            <?php
+            $nameIn = null;
+            $descIn = null;
+            $authorIn = null;
+            ?>
             <tr>
-                <td class="id_cell"></td>
+                <td colspan="2" class="id_cell"></td>
                 <td colspan="4" id="create_cell">
                     <form method="post">
                         <input class="id_cell buttonCell" type="submit" name="insert" value="Insert">

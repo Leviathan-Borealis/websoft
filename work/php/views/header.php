@@ -11,6 +11,7 @@
         <a class="button_links" href="/websoft/work/php/report/create.php">Create</a>
         <a class="button_links" href="/websoft/work/php/report/update.php">Update</a>
         <a class="button_links" href="/websoft/work/php/report/delete.php">Delete</a>
+        <a class="button_links" href="/websoft/work/php/report/read.php">Read</a>
     </nav>
 </header>
 <p></p>
