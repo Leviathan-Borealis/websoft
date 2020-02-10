@@ -1,3 +1,11 @@
 /.idea/
 /websoft.iml
 /work/s04/a04/node_modules/
+# nodejs
+node_modules/
+package-lock.json
+
+# dotnet
+project.lock.json
+[Bb]in/
+[Oo]bj/
