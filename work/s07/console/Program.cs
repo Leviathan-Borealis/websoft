@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.Linq;
+using s07;
 
 namespace s07
 {
@@ -11,11 +12,11 @@ namespace s07
     {
         static void Main(string[] args)
         {
-            
             int choice = -1;
             bool runApp = true;
             while (runApp){
-                var accounts = ReadAccounts();
+                var accounts = AccountHandler.ReadAccounts();
+                //var accounts = ReadAccounts();
                 printMenu();
                
                 choice = int.Parse(Console.ReadLine());
@@ -29,7 +30,7 @@ namespace s07
                         break;
                     }
                     case 2:{
-                        createAccount(accounts);
+                        AccountHandler.createAccount(accounts);
                         break;
                     }
                     case 3:{
@@ -51,10 +52,26 @@ namespace s07
                         break;
                     }
                     case 4:{
-                        deleteAccount(accounts);
+                        string query;
+                            Console.WriteLine("Enter search term");
+                            query = Console.ReadLine();
+                        List<Account> searchedAccounts = AccountHandler.searchAccounts(query,accounts);
+                        Console.WriteLine("Found " + searchedAccounts.Count + " account that matches");
+                        foreach(Account account in searchedAccounts){
+                            Console.WriteLine(account);
+                        }
+
                         break;
                     }
                     case 5:{
+                        AccountHandler.moveMoney(accounts);
+                        break;
+                    }
+                    case 6:{
+                        AccountHandler.deleteAccount(accounts);
+                        break;
+                    }
+                    case 7:{
                         Console.WriteLine("Exiting the application");
                         runApp = false;
                         break;
@@ -72,125 +89,12 @@ namespace s07
             String menu = "1. List accounts\n" + 
                             "2. Add account\n" + 
                             "3. View account by id\n" + 
-                            "4. Delete account\n" + 
-                            "5. Exit";
+                            "4. Search for account\n" + 
+                            "5. Transfer money\n" + 
+                            "6. Delete account\n" + 
+                            "7. Exit";
             Console.WriteLine(menu);
         }
-
-        static IEnumerable<Account> ReadAccounts()
-        {
-            String file = "work/s07/console/data/account.json";
-
-            using (StreamReader r = new StreamReader(file))
-            {
-                string data = r.ReadToEnd();
-                // Console.WriteLine(data);
-
-                var json = JsonSerializer.Deserialize<Account[]>(
-                    data,
-                    new JsonSerializerOptions {
-                        PropertyNameCaseInsensitive = true
-                    }
-                );
-
-                return json;
-            }
-        }
-
-        static void SaveAccounts(IEnumerable<Account> accounts)
-        {
-            String file = "work/s07/console/data/account.json";
-
-            using (var outputStream = File.OpenWrite(file))
-            {
-                JsonSerializer.Serialize<IEnumerable<Account>>(
-                    new Utf8JsonWriter (
-                        outputStream,
-                        new JsonWriterOptions {
-                            SkipValidation = true,
-                            Indented = true
-                        }
-                    ),
-                    accounts
-                );
-            }
-        }
-
-        static void SaveAccountsShorter(IEnumerable<Account> accounts)
-        {
-            String file = "work/s07/console/data/account.json";
-
-            using (var outputStream = File.Open(file,FileMode.Truncate))
-            {
-                JsonSerializer.Serialize<IEnumerable<Account>>(
-                    new Utf8JsonWriter (
-                        outputStream,
-                        new JsonWriterOptions {
-                            SkipValidation = true,
-                            Indented = true
-                        }
-                    ),
-                    accounts
-                );
-            }
-        }
-
-        static void createAccount(IEnumerable<Account> accounts){
-            int number;
-            string label;
-            int owner;
-
-            Console.WriteLine("Enter account number:");
-            number = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter account label:");
-            label = Console.ReadLine();
-
-            Console.WriteLine("Enter account owner:");
-            owner = int.Parse(Console.ReadLine());
-
-            Account unsavedAccount = new Account();
-            unsavedAccount.Number = number;
-            unsavedAccount.Label = label;
-            unsavedAccount.Owner = owner;
-
-            bool noSimilarObj = true;
-            do{
-                noSimilarObj = true;
-                foreach(var acc in accounts){
-                    while(unsavedAccount.isTheSame(acc)){
-                        noSimilarObj = false;
-                        Console.WriteLine("Account number already present. Please enter another number");
-                        unsavedAccount.Number = int.Parse(Console.ReadLine());
-                    }
-                }
-            } while (!noSimilarObj);
-
-            accounts = accounts.Append(unsavedAccount);
-            SaveAccounts(accounts);
-        
-        }
-
-        static void deleteAccount(IEnumerable<Account> accounts){
-            List<Account> accountList = accounts.ToList();
-            int accountId;
-            Console.WriteLine("Please enter account id to remove:");
-            accountId = int.Parse(Console.ReadLine());
-            Account toRemove = null;
-            foreach(var tempAcc in accounts){
-                if(tempAcc.Number == accountId){
-                    toRemove = tempAcc;
-                }
-            }
-
-            if(toRemove != null){
-                accountList.Remove(toRemove);
-            }
-            
-            SaveAccountsShorter(accountList);
-        }
-
-        
     }
 
     public class Account
