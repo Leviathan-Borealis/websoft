@@ -8,3 +8,39 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<table class="Nazareth_Table">
+
+<tr class="Nazareth_Row">
+        <td class="Nazareth_Cell">
+            <p>Number</p>
+        </td>
+        <td class="Nazareth_Cell">
+            <p>Balance</p>
+        </td>
+        <td class="Nazareth_Cell">
+            <p>Label</p>
+        </td>
+        <td class="Nazareth_Cell">
+            <p>Owner</p>
+        </td>
+    </tr>
+
+@foreach (var account in Model.Accounts)
+{
+    <tr class="Nazareth_Row">
+        <td class="Nazareth_Cell">
+            <p>@account.Number</p>
+        </td>
+        <td class="Nazareth_Cell">
+            <p>@account.Balance</p>
+        </td>
+        <td class="Nazareth_Cell">
+            <p>@account.Label</p>
+        </td>
+        <td class="Nazareth_Cell">
+            <p>@account.Owner</p>
+        </td>
+    </tr>
+}
+</table>
