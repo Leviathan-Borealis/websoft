@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using webapp.Models;
 using webapp.Services;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace webapp.Controllers
         }
 
         [HttpGet("{id}")]
-        public IEnumerable<Account> Get(int id)
+        public string Get(int id)
         {
             var accounts = AccountService.GetAccounts().ToList();
 
@@ -32,10 +33,11 @@ namespace webapp.Controllers
                 if(id == a.Number){
                     List<Account> aList = new List<Account>();
                     aList.Add(a);
-                    return aList;
+                    var json = JsonSerializer.Serialize<IEnumerable<Account>>(aList);
+                    return json;
                 }
             }
-            return new List<Account>();
+            return "[{\"error\":\"Account does not exist\"}]";
         }
     }
 }
