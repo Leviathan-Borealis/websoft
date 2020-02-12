@@ -15,5 +15,12 @@ namespace webapp.Models
         
         public override string ToString() =>
             JsonSerializer.Serialize<Account>(this);
+
+        public bool isTheSame(Account obj){
+            if(this.Number == obj.Number){
+                return true;
+            }
+            return false;
+        }
     }
 }

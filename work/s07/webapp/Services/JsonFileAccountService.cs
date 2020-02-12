@@ -33,5 +33,114 @@ namespace webapp.Services
                     });
             }
         }
+
+        public void SaveAccountsShorter(IEnumerable<Account> accounts)
+        {
+
+            using (var outputStream = File.Open(JsonFileName,FileMode.Truncate))
+            {
+                JsonSerializer.Serialize<IEnumerable<Account>>(
+                    new Utf8JsonWriter (
+                        outputStream,
+                        new JsonWriterOptions {
+                            SkipValidation = true,
+                            Indented = true
+                        }
+                    ),
+                    accounts
+                );
+            }
+        }
+
+        public void SaveLog(string toLog)
+        {
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(WebHostEnvironment.ContentRootPath, "../console", "data", "test.json")))
+            {
+                outputFile.WriteLine(toLog);
+            }
+        }
+
+        public bool createAccount(int number,string label,int owner){
+            IEnumerable<Account> accounts = GetAccounts();
+            Account unsavedAccount = new Account();
+            unsavedAccount.Number = number;
+            unsavedAccount.Label = label;
+            unsavedAccount.Owner = owner;
+
+            foreach(var acc in accounts){
+                while(unsavedAccount.isTheSame(acc)){
+                    return false;
+                }
+            }
+           
+            accounts = accounts.Append(unsavedAccount);
+            SaveAccountsShorter(accounts);
+            return true;
+        }
+
+        public bool deleteAccount(int accountId){
+            IEnumerable<Account> accounts = GetAccounts();
+            List<Account> accountList = accounts.ToList();
+            Account toRemove = null;
+            foreach(var tempAcc in accounts){
+                if(tempAcc.Number == accountId){
+                    toRemove = tempAcc;
+                }
+            }
+
+            if(toRemove != null){
+                accountList.Remove(toRemove);
+                SaveAccountsShorter(accountList);
+                return true;
+            }
+            
+            return false;
+        }
+
+        public List<Account> searchAccounts(string searchString){
+            IEnumerable<Account> accounts = GetAccounts();
+            List<Account> hits = new List<Account>();
+
+            int numberLike = -1;
+
+            int.TryParse(searchString,out numberLike);
+            
+            foreach(Account a in accounts){
+                if(numberLike == a.Number || numberLike == a.Owner || a.Label.Contains(searchString)){
+                    hits.Add(a);
+                }
+            }
+            return hits;
+        }
+
+        public bool moveMoney(int fromAccount,int toAccount,int amount){
+            IEnumerable<Account> accounts = GetAccounts();
+            List<Account> listOfAccounts = accounts.ToList();
+
+            Account withdrawAccount = null;
+            Account depositAccount = null;
+
+            foreach(Account a in accounts){
+                if(a.Number == fromAccount){
+                    withdrawAccount = a;
+                } else if (a.Number == toAccount){
+                    depositAccount = a;
+                }
+            }
+
+            if(withdrawAccount.isTheSame(depositAccount)){
+                return false;
+            }
+
+            if(withdrawAccount.Balance - amount < 0){
+                return false;
+            }
+
+            withdrawAccount.Balance -= amount;
+            depositAccount.Balance += amount;
+
+            SaveAccountsShorter(listOfAccounts);
+            return true;
+        }
     }
 }

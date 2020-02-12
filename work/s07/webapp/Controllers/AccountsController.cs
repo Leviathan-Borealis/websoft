@@ -56,6 +56,7 @@ namespace webapp.Controllers
             return "[{\"error\":\"Account does not exist\"}]";
         }
 
+/*
         [HttpPost("{idFrom:int}/{idTo:int}/{amount:int}")]
         public string Post(int idFrom,int idTo, int amount)
         {
@@ -70,6 +71,13 @@ namespace webapp.Controllers
                 }
             }
             return "[{\"error\":\"Account does not exist\"}]";
+        }
+        */
+        [HttpPost]
+        public ActionResult PostTodoItem(Transfer name)
+        {
+            AccountService.SaveLog(name.ToString());
+            return Ok();
         }
     }
 }
