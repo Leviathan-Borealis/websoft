@@ -4,6 +4,8 @@ using System.Text.Json;
 using webapp.Models;
 using webapp.Services;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+
 
 namespace webapp.Controllers
 {
@@ -55,29 +57,13 @@ namespace webapp.Controllers
             }
             return "[{\"error\":\"Account does not exist\"}]";
         }
-
-/*
-        [HttpPost("{idFrom:int}/{idTo:int}/{amount:int}")]
-        public string Post(int idFrom,int idTo, int amount)
-        {
-            var accounts = AccountService.GetAccounts().ToList();
-
-            foreach(var a in accounts){
-                if(idFrom == a.Number){
-                    List<Account> aList = new List<Account>();
-                    aList.Add(a);
-                    var json = JsonSerializer.Serialize<IEnumerable<Account>>(aList);
-                    return json;
-                }
-            }
-            return "[{\"error\":\"Account does not exist\"}]";
-        }
-        */
+    
         [HttpPost]
-        public ActionResult PostTodoItem(Transfer name)
+        public IActionResult PostTransfer(Transfer data)
         {
-            AccountService.SaveLog(name.ToString());
+            AccountService.SaveLog(data.idFrom.ToString() + " " + data.idTo.ToString() + " " + data.amount.ToString());
             return Ok();
         }
+       
     }
 }
