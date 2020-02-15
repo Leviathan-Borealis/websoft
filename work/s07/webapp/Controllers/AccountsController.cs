@@ -57,13 +57,34 @@ namespace webapp.Controllers
             }
             return "[{\"error\":\"Account does not exist\"}]";
         }
-    
+
+        //Api method
         [HttpPost]
+        [Route("transfer")]
         public IActionResult PostTransfer(Transfer data)
         {
-            AccountService.SaveLog(data.idFrom.ToString() + " " + data.idTo.ToString() + " " + data.amount.ToString());
+            AccountService.moveMoney(data.idFrom,data.idTo,data.amount);
             return Ok();
         }
-       
+    
+        //Form method
+        [HttpPost]
+        public IActionResult Post()
+        {   
+            var putMethod = Request.Form.AsEnumerable().ElementAt(0);
+            if(putMethod.Value == "true"){
+                var number = Request.Form.AsEnumerable().ElementAt(1);
+                var label = Request.Form.AsEnumerable().ElementAt(2);
+                var owner = Request.Form.AsEnumerable().ElementAt(3);
+                AccountService.createAccount(int.Parse(number.Value),label.Value,int.Parse(owner.Value));
+                return Redirect(Request.Headers["Referer"].ToString());
+            } else {
+                var idFrom = Request.Form.AsEnumerable().ElementAt(1);
+                var idTo = Request.Form.AsEnumerable().ElementAt(2);
+                var amount = Request.Form.AsEnumerable().ElementAt(3);
+                AccountService.moveMoney(int.Parse(idFrom.Value),int.Parse(idTo.Value),int.Parse(amount.Value));
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+        }       
     }
 }

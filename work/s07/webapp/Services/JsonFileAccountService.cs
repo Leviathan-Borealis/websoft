@@ -54,7 +54,7 @@ namespace webapp.Services
 
         public void SaveLog(string toLog)
         {
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(WebHostEnvironment.ContentRootPath, "../console", "data", "test.json")))
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(WebHostEnvironment.ContentRootPath, "../console", "data", "test.txt")))
             {
                 outputFile.WriteLine(toLog);
             }

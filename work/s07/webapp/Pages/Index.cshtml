@@ -45,10 +45,26 @@
 }
 </table>
 
-<form method="post" action="/api/accounts" target="ignore" onsubmit="this.reset();">
-    <input type="hidden" name="idFrom" value="111111">
-    <input type="hidden" name="idTo" value="42">
-    <input type="hidden" name="amount" value="1">
+<p>Transfer funds</p>
+<form method="post" action="/api/accounts">
+    <input type="hidden" name="put" value="false">
+    <p>Account to transfer money from
+        <input type="text" name="idFrom"></p>
+    <p>Account to transfer money to
+        <input type="text" name="idTo"></p>
+    <p>Amount to transfer
+        <input type="text" name="amount"></p>
     <input type="submit">
 </form>
-<iframe name="ignore" style="display:none;"></iframe>
+
+<p>Create new account</p>
+<form method="post" action="/api/accounts">
+    <input type="hidden" name="put" value="true">
+    <p>Account number
+        <input type="text" name="number"></p>
+    <p>Account label
+        <input type="text" name="label"></p>
+    <p>Account owner
+        <input type="text" name="owner"></p>
+    <input type="submit">
+</form>
