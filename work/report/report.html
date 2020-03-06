@@ -235,7 +235,25 @@
 
 <section>
     <h2>S09</h2>
-    <p>Here is the text for this section.</p>
+    <p>Implement https. Today this is almost a necessity but it's worth to be reminded. Using secure transfer makes
+        your data private during transfer. It is still good practice to not push user-credentials in "clear-text" even on
+        a secure connection.</p>
+    <P>Libraries is something most developers use frequently. Most of the time the are linked via Maven. But it is
+        not common to review used libraries for security flaws och back-doors. I recently read an article about
+        security issues within common libraries. Some flaws were just bugs. But some were deliberately inserted.
+        To review included libraries is not something commonly performed in industry and this is a huge problem.
+        The next best thing if not reviewing a library is to use well-known libraries/frameworks. Due to many users
+        errors within these libraries/frameworks should be spotted earlier and removed. But there is never a guaranty</P>
+    <p>Speaking of libraries and frameworks. Until you know how to implement proper security by yourself it is best
+        practice to use libraries and framework for this task. You will probably end up with better security than
+        implementing by hand. Remember, an attacker need only one hole. You need to find all the holes...</p>
+    <p>Last but not least, never ever ever use a development environment for production. A dev environment is configured
+        to make it easy to implement your site/software. But this also makes it easy for the hacker. Some popular servers
+        have had to implement some default security in their development environment due to the fact that many put the
+        server online in development configuration with disastrous consequences</p>
+    <p>I have been hosting 3 servers for some years and most of the server-side problems discussed was not new to me.
+        But the part about sessions and tokens is interesting. I haven't implemented this kind of security on any website/app
+        yet. We will probably do it in our project.</p>
 </section>
 
 <section>
