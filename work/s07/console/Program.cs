@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 using s07;
+using ConsoleTables;
 
 namespace s07
 {
@@ -24,9 +25,7 @@ namespace s07
                 switch(choice){
                     case 1:{
                             Console.WriteLine("Show all accounts");
-                            foreach (var account in accounts) {
-                                Console.WriteLine(account);
-                            }
+                            printAccounts(accounts.ToList());
                         break;
                     }
                     case 2:{
@@ -41,7 +40,7 @@ namespace s07
                             bool notFound = true;
                             foreach (var account in accounts) {
                                 if(account.Number == accountId){
-                                    Console.WriteLine(account);
+                                    printAccount(account);
                                     notFound = false;
                                 }
                             }
@@ -57,10 +56,7 @@ namespace s07
                             query = Console.ReadLine();
                         List<Account> searchedAccounts = AccountHandler.searchAccounts(query,accounts);
                         Console.WriteLine("Found " + searchedAccounts.Count + " account that matches");
-                        foreach(Account account in searchedAccounts){
-                            Console.WriteLine(account);
-                        }
-
+                        printAccounts(searchedAccounts);
                         break;
                     }
                     case 5:{
@@ -83,6 +79,20 @@ namespace s07
                     }
                 }
             }
+        }
+
+        static void printAccount(Account account){
+            var table = new ConsoleTable("Number","Balance","Label","Owner");
+            table.AddRow(account.Number,account.Balance,account.Label,account.Owner);
+            table.Write();
+        }
+
+        static void printAccounts(List<Account> accounts){
+            var table = new ConsoleTable("Number","Balance","Label","Owner");
+            foreach(Account account in accounts){
+                table.AddRow(account.Number,account.Balance,account.Label,account.Owner);
+            }
+            table.Write();
         }
 
         static void printMenu(){
