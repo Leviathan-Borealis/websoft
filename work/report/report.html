@@ -369,6 +369,27 @@
     <h2>S10</h2>
     <p>Target grade: 5</p>
     <p>Here is the text for this section.</p>
+    <p>At the beginning of the project me and Simon decided to split our responsibilities. Simon was to concentrate
+    on the fron-end part and I were to take care of hosting, security and back-end. After some discussion we landed
+    on React.JS to be used in frontend and PHP for the backend. We decided React.JS because we've been using it before
+        and want to become better at it. We chose PHP because I wanted to learn it.
+    Development started with the setup of two projects (frontend/backend) on my server. I then did a basic
+    implementation in React.JS to have when setting up the backend.
+    After this was done I setup the host with a separate MySQL-server and xammp-stack. I decided not to use the
+    DBMS included in xammp because it is a little bit tricky to design some behaviours that I want.
+    Then SSL was implemented on the the server. I made a request to a CA and got a certificate that was plugged into
+    the stack and tested. With the SSL in place I decided not to require Simon to implement further security. SSL
+    was enough for this project. A DDNS was also setup to enable both developers to talk to the same server and database.</p>
+    <p>Initially a PHP-api was produced with 2 endpoint. When all was working more endpoints with more functions was
+        added. After this initial sprint I decided to redesign the API to a single endpoint. This prevented the
+        cluttering I was beginning to sense in the back-end. Using this single endpoint a handler-script was introduced
+    into the front-end project. This script would be the endpoint Simon would use throughout this project, protecting
+    his work from my redesigns and debugging-measures.</p>
+    <p>When most of the methods were implemented and tested I decided to redesign the back-end data-flow. This was
+    because I wanted to have a better view of how data was flowing, what went right and if so, what went wrong. Due to
+    the handler-script on the front-end side this was implemented without affecting Simon's work.</p>
+    <p>Finally I produced our groups presentation video. It was hard to keep it light and simple without loosing
+    the important details that we wanted to mention. I do, however, think the result was good and represents our effort.</p>
     <p>Grade fulfillment
     </p>
 </section>
@@ -390,10 +411,6 @@
 <script type="text/javascript" src="js/main.js"></script>
 <script type='text/javascript' src='js/bug-min.js'></script>
 <script type='text/javascript'>
-    // default fruit fly bug:
-    //new BugController({});
-
-    // default spiders:
     new SpiderController({'minBugs':4, 'maxBugs':10});
 </script>
 <script src="js/flysim.js"></script>
